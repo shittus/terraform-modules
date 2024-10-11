@@ -44,12 +44,12 @@ output "private_app_subnet_az2_id" {
   
 }
 
-output "private_data_subnet_az1" {
+output "private_data_subnet_az1_id" {
     value = aws_subnet.private_data_subnet_az1.id
   
 }
 
-output "private_data_subnet_az2" {
+output "private_data_subnet_az2_id" {
     value = aws_subnet.private_data_subnet_az2.id
   
 }
