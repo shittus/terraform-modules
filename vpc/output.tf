@@ -60,6 +60,7 @@ output "availability_zone_1" {
 }
 
 output "availability_zone_2" {
-    value = data.aws_availability_zones.available_zones.name[1]
- 
+    value = data.aws_availability_zones.available_zones.names[1]
+  
 }
+

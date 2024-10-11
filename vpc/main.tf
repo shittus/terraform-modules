@@ -40,6 +40,10 @@ resource "aws_subnet" "public_subnet_az2" {
 
   availability_zone       = data.aws_availability_zones.available_zones.names[0]
   map_public_ip_on_launch = true
+
+
+  availability_zone       = data.aws_availability_zones.available_zones.names[0]
+  map_public_ip_on_launch = true
   tags = {
     Name = "${var.project_name}-${var.environment}-public-az2"
   }
