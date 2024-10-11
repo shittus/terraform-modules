@@ -55,11 +55,11 @@ output "private_data_subnet_az2_id" {
 }
 
 output "availability_zone_1" {
-    value = data.aws_availability_zones.available_zones.name[0]
+    value = data.aws_availability_zones.available_zones.names[0]
   
 }
 
 output "availability_zone_2" {
-    value = data.aws_availability_zones.available_zones.name[1]
+    value = data.aws_availability_zones.available_zones.names[1]
   
 }
