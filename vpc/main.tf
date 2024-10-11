@@ -25,7 +25,9 @@ data "aws_availability_zones" "available_zones" {}
 resource "aws_subnet" "public_subnet_az1" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.public_subnet_az1_cidr
+
   availability_zone       = aws_availability_zones.available_zones.names[0]
+
   map_public_ip_on_launch = true
 
   tags = {
@@ -37,7 +39,9 @@ resource "aws_subnet" "public_subnet_az1" {
 resource "aws_subnet" "public_subnet_az2" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.public_subnet_az2_cidr
+
   availability_zone       = aws_availability_zones.available_zones.names[0]
+
   map_public_ip_on_launch = true
 
   tags = {
@@ -75,7 +79,9 @@ resource "aws_route_table_association" "public_subnet_2_rt_association" {
 resource "aws_subnet" "private_app_subnet_az1" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.private_app_subnet_az1_cidr
+
   availability_zone       = aws_availability_zones.available_zones.names[0]
+
   map_public_ip_on_launch = false
 
   tags = {
@@ -87,7 +93,9 @@ resource "aws_subnet" "private_app_subnet_az1" {
 resource "aws_subnet" "private_app_subnet_az2" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.private_app_subnet_az2_cidr
+
   availability_zone       = aws_availability_zones.available_zones.names[1]
+
   map_public_ip_on_launch = false
 
   tags = {
@@ -99,7 +107,10 @@ resource "aws_subnet" "private_app_subnet_az2" {
 resource "aws_subnet" "private_data_subnet_az1" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.private_data_subnet_az1_cidr
+
   availability_zone       = aws_availability_zones.available_zones.names[0]
+
+
   map_public_ip_on_launch = false
 
   tags = {
@@ -111,7 +122,9 @@ resource "aws_subnet" "private_data_subnet_az1" {
 resource "aws_subnet" "private_data_subnet_az2" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.private_data_subnet_az2_cidr
+
   availability_zone       = aws_availability_zones.available_zones.names[1]
+
   map_public_ip_on_launch = false
 
   tags = {
