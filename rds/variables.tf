@@ -6,6 +6,9 @@ variable "database_snapshot_identifier" {}
 variable "database_instance_class" {}
 variable "availability_zone_1" {}
 variable "database_instance_identifier" {}
-variable "multi_az_deployment" {}
+variable "multi_az_deployment" {
+    description = "Enable or disable multi-AZ deployment"
+    type        = bool
+}
 variable "database_security_group_id" {}
 
