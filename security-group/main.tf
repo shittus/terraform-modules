@@ -124,4 +124,4 @@ resource "aws_security_group" "database_security_group" {
   tags = {
     Name = "${var.project_name}-${var.environment}-database-sg"
   }
-}
+
