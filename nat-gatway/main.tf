@@ -20,7 +20,9 @@ resource "aws_eip" "eip2" {
 
 # create nat gateway in public subnet az1
 resource "aws_nat_gateway" "nat_gateway_az1" {
+
   allocation_id = aws_eip.eip1.id
+
   subnet_id     = var.public_subnet_az1_id
 
   tags = {
@@ -88,7 +90,9 @@ resource "aws_route_table" "private_route_table_az2" {
 
 # associate private app subnet az2 with private route table az2
 resource "aws_route_table_association" "private_app_subnet_az2_rt_az2_association" {
-  subnet_id      = var.private_app_subnet_az1_id
+
+  subnet_id      = var.private_app_subnet_az2_id
+
   route_table_id = aws_route_table.private_route_table_az2.id
 }
 
