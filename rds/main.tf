@@ -11,19 +11,19 @@ resource "aws_db_subnet_group" "database_subnet_group" {
 
 # get information about a database snapshot
 data "aws_db_snapshot" "latest_db_snapshot" {
-  db_snapshot_identifier = var.database-snapshot-identifier
+  db_snapshot_identifier = var.database_snapshot_identifier
   most_recent            = true
   snapshot_type          = manual
 }
 
 # launch an rds instance from a database snapshot
 resource "aws_db_instance" "database_instance" {
-  instance_class         = var.database-instance-class
+  instance_class         = var.database_instance_class
   skip_final_snapshot    = true
   availability_zone      = var.availability_zone_1
-  identifier             = var.database-instance-identifier
+  identifier             = var.database_instance_identifier
   snapshot_identifier    = data.aws_db_snapshot.latest_db_snapshot.id
   db_subnet_group_name   = aws_db_subnet_group.database_subnet_group.id
-  multi_az               = var.multi-az-deployment
+  multi_az               = var.multi_az_deployment
   vpc_security_group_ids = var.database_security_group_id
 }
