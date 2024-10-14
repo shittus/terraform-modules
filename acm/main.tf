@@ -41,17 +41,19 @@
 
 
 # Data Source for ACM Certificate
+# Fetch details of an existing ACM certificate
 data "aws_acm_certificate" "existing_cert" {
   domain   = var.domain_name
-  statuses = ["ISSUED"]
+  statuses = ["ISSUED"]  # Fetch an issued certificate
 }
-# get details about a route 53 hosted zone
+
+# Get details about the Route 53 hosted zone
 data "aws_route53_zone" "route53_zone" {
   name         = var.domain_name
   private_zone = false
 }
 
-# Route 53 DNS record for ACM certificate validation (if DNS validation is needed)
+# Route 53 DNS record for ACM certificate validation
 resource "aws_route53_record" "acm_validation" {
   for_each = {
     for dvo in data.aws_acm_certificate.existing_cert.domain_validation_options : dvo.domain_name => {
@@ -62,17 +64,15 @@ resource "aws_route53_record" "acm_validation" {
   }
 
   allow_overwrite = true
-  zone_id = data.aws_route53_zone.route53_zone_id
+  zone_id = data.aws_route53_zone.route53_zone.zone_id  # Correct reference
   name    = each.value.name
   type    = each.value.type
   ttl     = 60
   records = [each.value.value]
 }
 
-# Wait for ACM certificate validation to complete (if needed)
+# Wait for ACM certificate validation to complete
 resource "aws_acm_certificate_validation" "cert_validation" {
   certificate_arn         = data.aws_acm_certificate.existing_cert.arn
   validation_record_fqdns = [for record in aws_route53_record.acm_validation : record.fqdn]
 }
-
-
