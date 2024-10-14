@@ -65,14 +65,20 @@ resource "aws_route53_record" "acm_validation" {
 
   allow_overwrite = true
   zone_id = data.aws_route53_zone.route53_zone.zone_id  # Correct reference
-  name    = each.value.name
-  type    = each.value.type
+  name    = ws_acm_certificate_validation.cert_validation.namd
+  type    = "CNAME"
   ttl     = 60
-  records = [each.value.value]
+  records = [aws_acm_certificate_validation.cert_validation.id]
 }
 
-# Wait for ACM certificate validation to complete
+# # Wait for ACM certificate validation to complete
+# resource "aws_acm_certificate_validation" "cert_validation" {
+#   certificate_arn         = data.aws_acm_certificate.existing_cert.arn
+#   validation_record_fqdns = [for record in aws_route53_record.acm_validation : record.fqdn]
+# }
+
 resource "aws_acm_certificate_validation" "cert_validation" {
   certificate_arn         = data.aws_acm_certificate.existing_cert.arn
-  validation_record_fqdns = [for record in aws_route53_record.acm_validation : record.fqdn]
+  validation_record_fqdns = [aws_route53_record.acm_validation.fqdn]
 }
+
