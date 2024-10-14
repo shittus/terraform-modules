@@ -48,6 +48,11 @@ resource "aws_acm_certificate" "cert" {
   validation_method = "DNS"
 }
 
+data "aws_route53_zone" "route53_zone" {
+  name         = var.domain_name
+  private_zone = false
+}
+
 # Create Route 53 DNS validation records
 resource "aws_route53_record" "acm_validation" {
   for_each = {
