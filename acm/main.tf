@@ -1,25 +1,3 @@
-# # request public certificates from the amazon certificate manager.
-# resource "aws_acm_certificate" "acm_certificate" {
-#   domain_name               = var.domain_name
-#   subject_alternative_names = [var.alternative_names]
-#   validation_method         = "DNS"
-
-#   lifecycle {
-#     create_before_destroy = true
-#   }
-# }
-
-# # get details about a route 53 hosted zone
-# data "aws_route53_zone" "route53_zone" {
-#   name         = var.domain_name
-#   private_zone = false
-# }
-
-
-
-
-
-
 # Create the ACM certificate
 resource "aws_acm_certificate" "cert" {
   domain_name       = var.domain_name
