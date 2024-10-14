@@ -5,5 +5,5 @@ output "certificate_arn" {
 
 # export the domain name
 output "domain_name" {
-  value = aws_acm_certificate.acm_certificate.names
+  value = aws_acm_certificate.acm_certificate.name
 }
