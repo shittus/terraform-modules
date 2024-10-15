@@ -26,4 +26,14 @@ resource "aws_db_instance" "database_instance" {
   db_subnet_group_name   = aws_db_subnet_group.database_subnet_group.id
   multi_az               = var.multi_az_deployment
   vpc_security_group_ids = [var.database_security_group_id]
+
+lifecycle {
+    ignore_changes = [
+      db_subnet_group_name,           # Ignore changes to subnet group
+      vpc_security_group_ids,         # Ignore changes to security groups
+      availability_zone               # Ignore changes to availability zone
+      # Add any other attributes you want to protect from triggering a recreate
+    ]
+    }
+
 }
