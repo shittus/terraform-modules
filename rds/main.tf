@@ -31,8 +31,7 @@ lifecycle {
     ignore_changes = [
       db_subnet_group_name,           # Ignore changes to subnet group
       vpc_security_group_ids,         # Ignore changes to security groups
-      availability_zone ,
-      aws_db_instance                               # Ignore changes to availability zone
+      availability_zone                             # Ignore changes to availability zone
       # Add any other attributes you want to protect from triggering a recreate
     ]
     }

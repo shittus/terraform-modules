@@ -22,7 +22,7 @@ resource "aws_cloudwatch_log_group" "log_group" {
 resource "aws_ecs_task_definition" "ecs_task_definition" {
   family                   =  "/ecs/${var.project_name}-${var.environment}-td"
   execution_role_arn       = var.ecs_task_execution_role_arn
-  network_mode             = awsvpc
+  network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = 2048
   memory                   = 4096
